@@ -1,5 +1,6 @@
 package entity;
 
+import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,7 +46,7 @@ public class StudentImp implements Student{
             }
         }
 
-        this.GPA = totalSubjects/totalScore;
+        this.GPA = totalScore/totalSubjects;
     }
 
     public void showDetails(){
@@ -54,7 +55,7 @@ public class StudentImp implements Student{
             +"\nCourse: "+this.course
             +"\nYear: "+this.year
             +"\nMarks: "+this.marks
-            +"\nGPA: "+this.GPA
+            +"\nGPA: "+new DecimalFormat("#.##").format(this.GPA)
         );
     }
 

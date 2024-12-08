@@ -1,5 +1,6 @@
 package service;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,18 +23,32 @@ public class StudentDatabaseService {
     }
 
     public String updateMarks(Integer studentId, String marks){
-        if(studentsDatabase.containsKey(studentId)){
+        if(!studentsDatabase.containsKey(studentId)){
             return "Student with id "+studentId+" Not found!";
         }
         Student student = studentsDatabase.get(studentId);
         student.updateMarks(marks);
-        return "Marks updated successfully. CurrentGPA: "+ student.getGPA();
+        return "Marks updated successfully. Current GPA: "+ new DecimalFormat("#.##").format(student.getGPA());
     }
 
     public void showDetails(Integer studentId){
-        if(studentsDatabase.containsKey(studentId)){
+        if(!studentsDatabase.containsKey(studentId)){
             System.out.println("Student with id "+studentId+" Not found!");
+            return;
         }
         studentsDatabase.get(studentId).showDetails();
+    }
+
+    public void showAllStudentDetails(){
+        if(studentsDatabase.isEmpty()){
+            System.out.println("No student data available!");
+            return;
+        } 
+
+        for(Integer studentId: studentsDatabase.keySet()){
+            System.out.println("Student Id: "+studentId);
+            studentsDatabase.get(studentId).showDetails();
+            System.out.println();
+        }
     }
 }
