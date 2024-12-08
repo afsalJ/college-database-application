@@ -62,4 +62,8 @@ public class StudentImp implements Student{
         this.marks = marks;
         updateGPA();
     }
+
+    public Double getGPA(){
+        return GPA;
+    }
 }
